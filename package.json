@@ -6,6 +6,7 @@
     "bootstrap": "^4.2.1",
     "font-awesome": "^4.7.0",
     "joi-browser": "^13.4.0",
+    "moment": "^2.24.0",
     "react": "^16.7.0",
     "react-advanced-datetimerange-picker": "^0.1.10",
     "react-dom": "^16.7.0",

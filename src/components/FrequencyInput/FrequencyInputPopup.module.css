@@ -1,0 +1,18 @@
+.SelectedTime {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+
+}
+
+.SelectedTime span {
+    margin-right: 20px;
+    cursor: pointer;
+    border: 1px solid #bef954;
+    border-radius: 3px;
+    background-color: #bef954;
+    padding: 4px;
+}

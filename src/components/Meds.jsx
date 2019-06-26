@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import moment from 'moment';
 import TimeTable from "./TimeTable";
 import { Link } from "react-router-dom";
 import { getMedsCollection } from "./../services/fakeMedsService";
@@ -7,8 +8,10 @@ import ListGroup from "./common/ListGroup";
 
 
 
+
 class Meds extends Component {
   state = {
+    currentDate: moment(),
     meds: [],
     patients: [],
     selectedPatient: null
@@ -24,13 +27,7 @@ class Meds extends Component {
     this.setState({ selectedPatient: patient });
   };
 
-  handleClick = m => {
-    const meds = [...this.state.meds];
-    const index = meds.indexOf(m);
-    meds[index] = { ...meds[index] };
-    meds[index].token = !meds[index].token;
-    this.setState({ meds });
-  };
+ 
 
   render() {
     const { selectedPatient } = this.state;
@@ -56,7 +53,8 @@ class Meds extends Component {
           </div>
           <div className="col">
             <h1>Прием лекарств</h1>
-            <TimeTable meds={filtered} onClick={this.handleClick} />
+            <TimeTable meds={filtered} />
+            
             
             <Link to="medicine/medicine-list" className="btn btn-success">
               Аптечка

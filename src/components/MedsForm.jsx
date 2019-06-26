@@ -1,20 +1,25 @@
 import React from "react";
+import moment from "moment";
 import Joi from "joi-browser";
 import Form from "./common/Form";
+
 import { saveMeds, getMeds } from "../services/fakeMedsService";
 import { getPatients } from "../services/fakePatientsService";
 
 class MedsForm extends Form {
   state = {
+    currentDate: moment(),
     data: {
       title: "",
       dose: "",
       patient: "",
-      frequency: "",
-      duration: "",
+      frequency: [],
+      startDate: moment().format("YYYY-MM-DD"),
+      endDate: moment().format("YYYY-MM-DD"),
       notify: true
     },
     patients: [],
+
     errors: {}
   };
 
@@ -23,8 +28,9 @@ class MedsForm extends Form {
     title: Joi.string().required(),
     dose: Joi.string(),
     patient: Joi.string(),
-    frequency: Joi.string().required(),
-    duration: Joi.string().required(),
+    frequency: Joi.array().required(),
+    startDate: Joi.date().required(),
+    endDate: Joi.date().required(),
     notify: Joi.bool()
   };
 
@@ -48,7 +54,8 @@ class MedsForm extends Form {
       dose: meds.dose,
       patient: meds.patient._id,
       frequency: meds.frequency,
-      duration: meds.duration,
+      startDate: meds.startDate,
+      endDate: meds.endDate,
       notify: meds.notify
     };
   }
@@ -71,8 +78,9 @@ class MedsForm extends Form {
           )}
           {this.renderInput("dose", "Дозировка")}
           {this.renderSelect("patient", "Кому принимать", this.state.patients)}
-          {this.renderInput("frequency", "Частота приема")}
-          {this.renderInput("duration", "Продолжительность курса")}
+          {this.renderFrequencyInput("frequency", "Частота приема")}
+          {this.renderInput("startDate", "Начало приема", "", "date")}
+          {this.renderInput("endDate", "Окончание приема", "", "date")}
           {this.renderCheckbox("notify", "Присылать уведомления")}
           {this.renderButton("Готово")}
         </form>

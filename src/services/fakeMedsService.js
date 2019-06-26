@@ -22,7 +22,8 @@ export function saveMeds(meds) {
   medsInDb.dose = meds.dose;
   medsInDb.patient = patientsAPI.patients.find(p => p._id === meds.patient);
   medsInDb.frequency = meds.frequency;
-  medsInDb.duration = meds.duration;
+  medsInDb.startDate = meds.startDate;
+  medsInDb.endDate = meds.endDate;
   medsInDb.notify = meds.notify;
 
   if (!medsInDb._id) {
